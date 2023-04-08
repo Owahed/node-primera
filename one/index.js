@@ -1,15 +1,24 @@
 const http = require("http");
+const fs = require("fs");
+
+const data = fs.readFile(`${__dirname}/data/data.json`, "utf-8");
+const dataObj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
-  if (pathName === "/") {
-    res.end("this is home");
-  } else if (pathName === "/about") {
-    res.end("this is about");
+  const pathUrl = req.url;
+
+  if (pathUrl === "/") {
+    res.end("This is Home");
+  } else if (pathUrl === "/api") {
+    res.writeHead(200, {
+      "Content-type": "application/json",
+    });
+    res.end(data);
   } else {
-    res.end("no");
+    res.end("not found");
   }
 });
-server.listen(4000, () => {
-  console.log("serve is running");
+
+server.listen(3000, () => {
+  console.log("server is running");
 });
