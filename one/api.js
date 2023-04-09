@@ -8,14 +8,14 @@ const server = http.createServer((req, res) => {
   const pathUrl = req.url;
 
   if (pathUrl === "/") {
-    res.end("this is home page");
+    res.end("This is Home");
   } else if (pathUrl === "/api") {
     res.writeHead(200, {
       "Content-type": "application/json",
     });
     res.end(data);
   } else {
-    res.end("no");
+    res.end("not found");
   }
 });
 
